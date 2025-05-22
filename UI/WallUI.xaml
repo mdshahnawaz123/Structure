@@ -1,0 +1,78 @@
+﻿<Window x:Class="Structure.UI.WallUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Structure.UI"
+        mc:Ignorable="d" 
+        Title="Wall Configuration" Height="460" Width="400"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="White">
+
+    <Grid Margin="10">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+
+            <!-- Title -->
+            <TextBlock Text="Wall Configuration Tool" 
+                       FontSize="20" FontWeight="Bold" 
+                       Foreground="#2E3A59" TextAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <!-- Pick CAD Layer Button -->
+            <Button Content="Pick a CAD Layer" 
+                    Background="#3498db" Foreground="White" 
+                    FontWeight="Bold" Padding="8" 
+                    Margin="0,0,0,20" BorderThickness="0" 
+                    Cursor="Hand" Click="PickedCad_OnClick"/>
+
+            <!-- Wall Layer Selection -->
+            <TextBlock Text="Wall Layer:" FontWeight="SemiBold"/>
+            <ComboBox Name="SelectedLayerNameComboBox" Height="30" Margin="0,5,0,15"/>
+
+            <!-- Wall Type Selection -->
+            <TextBlock Text="Wall Type:" FontWeight="SemiBold"/>
+            <ComboBox Name="WallTypeComboBox" Height="30" Margin="0,5,0,15"/>
+
+            <!-- Top and Bottom Level Selection -->
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Top Level:" FontWeight="SemiBold"/>
+                    <ComboBox Name="WallTopLevelComboBox" Height="30" Margin="0,5,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Base Level:" FontWeight="SemiBold"/>
+                    <ComboBox Name="WallBottomLevelComboBox" Height="30" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Create Wall Button -->
+            <Button Content="Create Wall" 
+                    Background="#2980b9" Foreground="White" 
+                    FontWeight="Bold" Padding="10" 
+                    BorderThickness="0" Cursor="Hand"
+                    Margin="10,10,0,20"
+                    Click="CreateWall_OnClick"/>
+
+            <!-- Footer -->
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Powered by BIM Digital Design" 
+                           FontSize="10" Foreground="Gray" TextAlignment="Center"/>
+                <TextBlock FontSize="10" TextAlignment="Center">
+                    <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com" 
+                               RequestNavigate="Hyperlink_RequestNavigate" 
+                               Foreground="Gray">
+                        bimdigitaldesign@gmail.com
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

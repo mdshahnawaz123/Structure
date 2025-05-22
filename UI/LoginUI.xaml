@@ -1,0 +1,43 @@
+﻿<Window x:Class="Structure.UI.Loginform"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="280" Width="350"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="#FAFAFA">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Username -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <Label Content="Username" FontWeight="SemiBold"/>
+            <TextBox x:Name="UsernameTextBox" Width="280" Height="30" Padding="5" FontSize="14"/>
+        </StackPanel>
+
+        <!-- Password -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <Label Content="Password" FontWeight="SemiBold"/>
+            <PasswordBox x:Name="PasswordBox" Width="280" Height="30" Padding="5" FontSize="14" Visibility="Visible"/>
+            <TextBox x:Name="VisiblePasswordBox" Width="280" Height="30" Padding="5" FontSize="14" Visibility="Collapsed"/>
+        </StackPanel>
+
+        <!-- Show Password -->
+        <CheckBox x:Name="ShowPasswordCheckBox"
+                  Content="Show Password"
+                  Grid.Row="2"
+                  Margin="0,0,0,10"
+                  Checked="ShowPasswordCheckBox_Checked"
+                  Unchecked="ShowPasswordCheckBox_Unchecked"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Login" Width="90" Height="30" Margin="5" Click="LoginButton_Click"/>
+            <Button Content="Cancel" Width="90" Height="30" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

@@ -1,0 +1,133 @@
+﻿<Window x:Class="Structure.UI.DoorUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Door Placement Tool"
+        Height="550" Width="420"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F3F4F6"
+        FontFamily="Segoe UI"
+        FontSize="13">
+
+    <Window.Resources>
+        <!-- ✅ Custom Rounded Button Style -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 🔄 Light Gray Button Style -->
+        <Style x:Key="LightButtonStyle" TargetType="Button" BasedOn="{StaticResource RoundedButtonStyle}">
+            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Foreground" Value="#333"/>
+        </Style>
+    </Window.Resources>
+
+    <Border Margin="20" Background="White" CornerRadius="10" Padding="20" 
+            BorderBrush="#E0E0E0" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Title -->
+                <RowDefinition Height="Auto"/>
+                <!-- Pick CAD -->
+                <RowDefinition Height="Auto"/>
+                <!-- CAD Layer -->
+                <RowDefinition Height="Auto"/>
+                <!-- Door Type -->
+                <RowDefinition Height="Auto"/>
+                <!-- Level -->
+                <RowDefinition Height="Auto"/>
+                <!-- Buttons -->
+                <RowDefinition Height="*"/>
+                <!-- Spacer -->
+                <RowDefinition Height="Auto"/>
+                <!-- Footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="0"
+                       Text="Door Placement Tool"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Foreground="#2D2D2D"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <!-- Pick CAD File -->
+            <Button Grid.Row="1"
+                    Content="📁 Pick a CAD Layer"
+                    Width="200" Height="34"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,20"
+                    Click="PickCadButton_Click"/>
+
+            <!-- CAD Layer -->
+            <StackPanel Grid.Row="2" Margin="0,0,0,12" HorizontalAlignment="Center">
+                <Label Content="CAD Layer" FontWeight="SemiBold" Foreground="#444"/>
+                <ComboBox x:Name="CBLayer" Width="260" Height="28" Padding="5"/>
+            </StackPanel>
+
+            <!-- Door Type -->
+            <StackPanel Grid.Row="3" Margin="0,0,0,12" HorizontalAlignment="Center">
+                <Label Content="Door Type" FontWeight="SemiBold" Foreground="#444"/>
+                <ComboBox x:Name="CBDoorType" Width="260" Height="28" Padding="5"/>
+            </StackPanel>
+
+            <!-- Level -->
+            <StackPanel Grid.Row="4" Margin="0,0,0,12" HorizontalAlignment="Center">
+                <Label Content="Level" FontWeight="SemiBold" Foreground="#444"/>
+                <ComboBox x:Name="CBLevel" Width="260" Height="28" Padding="5"/>
+            </StackPanel>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="5"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,10,0,0">
+                <Button Content="Create Doors"
+                        Width="130" Height="32"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="CreateDoorButton_Click"/>
+                <Button Content="🔄 Reset"
+                        Width="130" Height="32"
+                        Style="{StaticResource LightButtonStyle}"
+                        Click="ResetFormButton_Click"/>
+            </StackPanel>
+
+            <!-- Footer -->
+            <StackPanel Grid.Row="7" HorizontalAlignment="Center" Margin="0,30,0,0">
+                <TextBlock Text="Powered by BIM Digital Design"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Foreground="Gray"
+                           HorizontalAlignment="Center"/>
+                <TextBlock FontSize="11"
+                           Foreground="#777"
+                           HorizontalAlignment="Center">
+                    <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com"
+                               RequestNavigate="Email_RequestNavigate">
+                        bimdigitaldesign@gmail.com
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

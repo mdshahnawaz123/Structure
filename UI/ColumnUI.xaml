@@ -1,0 +1,84 @@
+﻿<Window x:Class="Structure.UI.ColumnUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Column Configuration"
+        Height="480"
+        Width="450"
+        Background="White"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title and Pick Button -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Label Content="Column Configuration Tool"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   Margin="0,10,0,5"/>
+            <Button x:Name="PickedCad"
+                    Content="Pick a CAD Layer"
+                    Background="#3498DB"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    Padding="8"
+                    Margin="0,0,0,10"
+                    Width="160"
+                    Click="PickedCad_OnClick"/>
+        </StackPanel>
+
+        <!-- Layer and Column Type -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
+            <StackPanel Margin="10">
+                <Label Content="Column Layer:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="CBLayer" Width="180" Height="25"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Label Content="Column Type:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="CBColumnType" Width="180" Height="25"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Top/Base Levels -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
+            <StackPanel Margin="10">
+                <Label Content="Top Level:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="CBTopLevel" Width="170" Height="25"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Label Content="Base Level:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="CBBaseLevel" Width="170" Height="25"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Action Button and Footer -->
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" Margin="10">
+            <Button x:Name="ColumnCreation"
+                    Content="Create Column"
+                    Background="#007ACC"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Padding="10"
+                    Width="180"
+                    Height="40"
+                    Click="ColumnCreation_OnClick"/>
+            <TextBlock Text="Powered by BIM Digital Design"
+                       Margin="10,20,10,2"
+                       FontSize="12"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="bimdigitaldesign@gmail.com"
+                       FontSize="12"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       IsHyphenationEnabled="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

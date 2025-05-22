@@ -1,0 +1,125 @@
+﻿<Window x:Class="Structure.UI.BeamUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Title="Beam Configuration"
+        Height="540" Width="380"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#F8F9FA"
+        FontFamily="Segoe UI"
+        FontSize="14"
+        mc:Ignorable="d">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="Beam Configuration Tool"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#343A40"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,10"/>
+
+        <!-- Pick CAD Button -->
+        <Button x:Name="PickButton"
+                Click="PickCadButton"
+                Grid.Row="2"
+                Content="Pick a CAD Layer"
+                Width="240" Height="40"
+                Background="#007BFF"
+                Foreground="White"
+                FontWeight="Bold"
+                BorderBrush="#007BFF"
+                HorizontalAlignment="Center"
+                Cursor="Hand"
+                Margin="0,10">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#007BFF"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#0056b3"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- Layer Combo -->
+        <StackPanel Grid.Row="3" Margin="0,10,0,0">
+            <TextBlock Text="CAD Layer Name:" Margin="4,6,0,4" FontWeight="SemiBold" Foreground="#495057"/>
+            <ComboBox x:Name="LayerNameComboBox" Height="32" Padding="6" Background="White" BorderBrush="#CED4DA"/>
+        </StackPanel>
+
+        <!-- Beam Type Combo -->
+        <StackPanel Grid.Row="4" Margin="0,10,0,0">
+            <TextBlock Text="Beam Type:" Margin="4,6,0,4" FontWeight="SemiBold" Foreground="#495057"/>
+            <ComboBox x:Name="BeamTypeComboBox" Height="32" Padding="6" Background="White" BorderBrush="#CED4DA"/>
+        </StackPanel>
+
+        <!-- Reference Level Combo -->
+        <StackPanel Grid.Row="5" Margin="0,10,0,0">
+            <TextBlock Text="Reference Level:" Margin="4,6,0,4" FontWeight="SemiBold" Foreground="#495057"/>
+            <ComboBox x:Name="ReferenceLevelComboBox" Height="32" Padding="6" Background="White" BorderBrush="#CED4DA"/>
+        </StackPanel>
+
+        <!-- Create Button -->
+        <Button x:Name="CreateBeam"
+                Click="CreateBeamButton"
+                Grid.Row="6"
+                Content="Create Beam"
+                Width="240" Height="40"
+                Background="#28A745"
+                Foreground="White"
+                FontWeight="Bold"
+                BorderBrush="#28A745"
+                HorizontalAlignment="Center"
+                Cursor="Hand"
+                Margin="0,15,0,0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#28A745"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#1E7E34"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="7"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Margin="0,25,0,0">
+            <TextBlock Text="Powered by BIM Digital Design"
+                       FontSize="11"
+                       Foreground="#6C757D"
+                       HorizontalAlignment="Center"/>
+            <TextBlock FontSize="11" Foreground="#6C757D">
+                <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com"
+                           RequestNavigate="Hyperlink_RequestNavigate">
+                    bimdigitaldesign@gmail.com
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

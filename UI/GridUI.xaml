@@ -1,0 +1,127 @@
+﻿<Window x:Class="Structure.UI.GridUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Grid Automation"
+        Height="330"
+        Width="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F0F2F5"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          Color="#000000"
+                          BlurRadius="10"
+                          ShadowDepth="2"
+                          Opacity="0.2"/>
+    </Window.Resources>
+
+    <Grid>
+        <Border Margin="20"
+                Background="White"
+                CornerRadius="10"
+                Padding="25"
+                Effect="{StaticResource DropShadowEffect}">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
+
+                <!-- Title -->
+                <TextBlock Text="Grid Automation"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#2E3A59"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"/>
+
+                <!-- Layer Label -->
+                <TextBlock Text="Select CAD Layer"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           Foreground="#444"
+                           Margin="0,0,0,4"
+                           HorizontalAlignment="Left"/>
+
+                <!-- ComboBox -->
+                <ComboBox x:Name="CBLayer"
+                          Width="Auto"
+                          Height="36"
+                          Padding="8,0"
+                          BorderBrush="#CCC"
+                          BorderThickness="1"
+                          Background="#FFF"
+                          FontSize="13"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Left"/>
+
+                <!-- Button Row -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button x:Name="Picked"
+                            Click="Picked_OnClick"
+                            Content="Pick CAD Layer"
+                            Width="150"
+                            Height="38"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            BorderThickness="0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#4CAF50"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#388E3C"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button x:Name="GridCreation"
+                            Content="Create Grid"
+                            Click="GridCreation_OnClick"
+                            Margin ="30,0,6,0"
+                            Width="150"
+                            Height="38"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Background="#2196F3"
+                            Foreground="White"
+                            BorderThickness="0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#2196F3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#1976D2"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+
+                <!-- Footer -->
+                <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <TextBlock Text="Powered by BIM Digital Design"
+                               FontSize="12"
+                               FontStyle="Italic"
+                               Foreground="Gray"
+                               TextAlignment="Center"/>
+                    <TextBlock FontSize="12"
+                               FontStyle="Italic"
+                               TextAlignment="Center">
+                        <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com"
+                                   RequestNavigate="Hyperlink_RequestNavigate"
+                                   Cursor="Hand"
+                                   Foreground="Gray"
+                                   TextDecorations="None">
+                            bimdigitaldesign@gmail.com
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

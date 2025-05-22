@@ -1,0 +1,92 @@
+﻿<Window x:Class="Structure.UI.PileCoordinatesUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pile Coordinates"
+        Height="330"
+        Width="420"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="StyledButton" TargetType="Button">
+            <Setter Property="Background" Value="#4682B4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#315C91"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Base Coordinate"
+                   FontWeight="Bold"
+                   FontSize="15"
+                   Foreground="DarkSlateBlue"
+                   Grid.Row="0"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10">
+            <RadioButton x:Name="rdoSurveyPoint" Content="Survey Point" GroupName="BaseCoordinateGroup" Margin="5,0"/>
+            <RadioButton x:Name="rdoProjectBasePoint" Content="Project Base Point" GroupName="BaseCoordinateGroup" Margin="5,0"/>
+            <RadioButton x:Name="rdoInternalOrigin" Content="Internal Origin" GroupName="BaseCoordinateGroup" Margin="5,0"/>
+        </StackPanel>
+
+        <TextBlock Text="Scope Selection"
+                   FontWeight="Bold"
+                   FontSize="15"
+                   Foreground="DarkSlateBlue"
+                   Grid.Row="3"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,0,0,10">
+            <RadioButton x:Name="rdoEntireProject" Content="Entire Project" GroupName="ScopeGroup" Margin="5,0"/>
+            <RadioButton x:Name="rdoCurrentView" Content="Current View" GroupName="ScopeGroup" Margin="5,0"/>
+            <RadioButton x:Name="rdoCurrentSelection" Content="Current Selection" GroupName="ScopeGroup" Margin="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" HorizontalAlignment="Center" Margin="0,10,0,10">
+            <Button Content="OK" Style="{StaticResource StyledButton}" Click="OK_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock FontSize="12" FontWeight="Bold" Foreground="#2C3E50" Text="Powered by BIM Digital Design"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" HorizontalAlignment="Center">
+            <TextBlock FontSize="11" Foreground="SlateGray" TextAlignment="Center">
+                <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com"
+                           RequestNavigate="Hyperlink_RequestNavigate"
+                           Foreground="DarkSlateBlue"
+                           TextDecorations="Underline">
+                    bimdigitaldesign@gmail.com
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
