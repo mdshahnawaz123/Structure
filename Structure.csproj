@@ -13,13 +13,17 @@
     <None Remove="Resources\Beam.png" />
     <None Remove="Resources\Column.png" />
     <None Remove="Resources\Coordinate.png" />
+    <None Remove="Resources\Data.png" />
     <None Remove="Resources\Dim.png" />
+    <None Remove="Resources\Export.png" />
     <None Remove="Resources\Floor.png" />
     <None Remove="Resources\Grid.png" />
     <None Remove="Resources\Join.png" />
+    <None Remove="Resources\Mark.png" />
     <None Remove="Resources\PCC.png" />
     <None Remove="Resources\Wall.png" />
     <None Remove="Resources\WorkSet.png" />
+    <None Remove="Resources\XML.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,7 +48,13 @@
     <Resource Include="Resources\Coordinate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Data.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Dim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Export.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Floor.png">
@@ -56,6 +66,9 @@
     <Resource Include="Resources\Join.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Mark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\PCC.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -63,6 +76,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\WorkSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\XML.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

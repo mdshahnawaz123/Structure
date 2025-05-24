@@ -114,11 +114,46 @@ namespace Structure.App
             CButton.ToolTip = "Create Column to Grid Dimension as per predefined rules.";
             CButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Dim.png"));
 
-            // === Grid Dimension ===
+            // === ChatGPT ===
             var chatGpt = new PushButtonData("ChatGPT AI", "ChatGPT", assemblyPath, "Structure.Command.ChatGPTCommand");
             PushButton ChatButton = ModelAutomationPanel.AddItem(chatGpt) as PushButton;
             ChatButton.ToolTip = "Chat With your AI.";
             ChatButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/AI.png"));
+
+
+            RibbonPanel ParameterPanel = application.CreateRibbonPanel(tabName, "Parameter Automation");
+
+            // === Mark Command ===
+            var markparm = new PushButtonData("Mark Automation", "Mark", assemblyPath, "Structure.Command.MarkCommand");
+            PushButton MarkButton = ParameterPanel.AddItem(markparm) as PushButton;
+            MarkButton.ToolTip = "Create Grid to Grid Dimension as per predefined rules.";
+            MarkButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Mark.png"));
+
+
+
+
+
+
+
+            RibbonPanel DataPanel = application.CreateRibbonPanel(tabName, "Data Visualizer");
+
+            // === Data Panel ===
+            var data = new PushButtonData("Foundation Data Visualization", "Foundation", assemblyPath, "Structure.Command.FoundationData");
+            PushButton dataButton = DataPanel.AddItem(data) as PushButton;
+            data.ToolTip = "Visualize the Data as per predefined rules.";
+            data.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Data.png"));
+
+
+
+
+            RibbonPanel DataExportPanel = application.CreateRibbonPanel(tabName, "Data Export");
+
+            var Exportdata = new PushButtonData("Export Data to Excel", "Export", assemblyPath, "Structure.Command.FoundationData");
+            PushButton dataExportButton = DataExportPanel.AddItem(Exportdata) as PushButton;
+            dataExportButton.ToolTip = "Export data as per predefined rules.";
+            dataExportButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/XML.png"));
+
+
 
 
 
