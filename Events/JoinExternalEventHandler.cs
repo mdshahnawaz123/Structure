@@ -3,7 +3,7 @@ using System.Windows.Navigation;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
-namespace ElementJoin
+namespace Structure.Events
 {
     public class JoinExternalEventHandler : IExternalEventHandler
     {

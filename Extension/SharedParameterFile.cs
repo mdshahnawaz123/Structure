@@ -30,8 +30,8 @@ namespace Structure
                 {
                     try
                     {
-                        File.Create(dlg.FileName).Close();          // create & close
-                        app.SharedParametersFilename = dlg.FileName; // register
+                        File.Create(dlg.FileName).Close();
+                        app.SharedParametersFilename = dlg.FileName;
                         TaskDialog.Show("Success", $"Shared parameter file set:\n{dlg.FileName}");
                     }
                     catch (Exception ex)

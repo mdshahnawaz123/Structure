@@ -83,7 +83,7 @@
                 Click="CreateBeamButton"
                 Grid.Row="6"
                 Content="Create Beam"
-                Width="240" Height="40"
+                Width="240" Height="30"
                 Background="#28A745"
                 Foreground="White"
                 FontWeight="Bold"

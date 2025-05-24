@@ -9,13 +9,62 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\AI.png" />
+    <None Remove="Resources\Beam.png" />
+    <None Remove="Resources\Column.png" />
+    <None Remove="Resources\Coordinate.png" />
+    <None Remove="Resources\Dim.png" />
+    <None Remove="Resources\Floor.png" />
+    <None Remove="Resources\Grid.png" />
+    <None Remove="Resources\Join.png" />
+    <None Remove="Resources\PCC.png" />
+    <None Remove="Resources\Wall.png" />
+    <None Remove="Resources\WorkSet.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="8.0.3" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\AI.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Beam.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Column.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Coordinate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Dim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Floor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Grid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Join.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\PCC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Wall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\WorkSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

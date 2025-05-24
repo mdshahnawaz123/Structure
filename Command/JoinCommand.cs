@@ -3,7 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Structure.UI;
 
-namespace ElementJoin
+namespace Structure.Command
 {
     [Transaction(TransactionMode.Manual)]
     public class JoinCommand : IExternalCommand

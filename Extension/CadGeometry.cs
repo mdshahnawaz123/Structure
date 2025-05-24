@@ -52,7 +52,6 @@ namespace Structure.Extension
 
             return cadGeometry;
         }
-
         public IList<Line> GetPline(ImportInstance importInstance, string? selectedLayer)
         {
             IList<Line> pLines = new List<Line>();
@@ -90,8 +89,6 @@ namespace Structure.Extension
 
             return pLines;
         }
-
-
         public IList<Curve> GetCurves(ImportInstance importInstance)
         {
             IList<Curve> curves = new List<Curve>();
@@ -119,8 +116,6 @@ namespace Structure.Extension
 
             return curves;
         }
-
-
         public IList<Arc> GetArc(ImportInstance importInstance)
         {
             IList<Arc> arcs = new List<Arc>();
@@ -185,9 +180,5 @@ namespace Structure.Extension
 
             return polyLines;
         }
-
-
-
     }
-
 }

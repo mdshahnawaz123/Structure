@@ -82,7 +82,7 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <Label Content="Offset (mm)" Width="180" VerticalAlignment="Center"/>
-                    <TextBox x:Name="PCCOfset" Width="160" Height="28"/>
+                    <TextBox x:Name="PCCOfset" Width="160" Height="28" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
         </Border>
