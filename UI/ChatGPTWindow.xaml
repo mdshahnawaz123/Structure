@@ -2,65 +2,94 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ChatGPT Assistant"
-        Height="450" Width="600"
-        Background="#FFFAFAFA" WindowStartupLocation="CenterScreen">
+        Height="550" Width="900"
+        ResizeMode="CanMinimize"
+        Background="#1E1E1E"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI">
 
-    <Grid>
-        <!-- Main layout using Grid Row definitions -->
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <!-- Output Area -->
             <RowDefinition Height="Auto" />
-            <!-- Input Area -->
-            <RowDefinition Height="Auto" />
-            <!-- Footer -->
         </Grid.RowDefinitions>
 
-        <!-- Output Display Box -->
-        <ScrollViewer Grid.Row="0" Margin="10" VerticalScrollBarVisibility="Auto">
-            <TextBox Name="ResponseBox"
-                     TextWrapping="Wrap"
-                     IsReadOnly="True"
-                     BorderThickness="0"
-                     Background="White"
-                     FontSize="14"
-                     VerticalScrollBarVisibility="Auto"
-                     AcceptsReturn="True"/>
-        </ScrollViewer>
+        <!-- Response Display -->
+        <Border Grid.Row="0" CornerRadius="10" Background="#252526" Padding="12" Margin="0,0,0,10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox Name="ResponseBox"
+                         TextWrapping="Wrap"
+                         IsReadOnly="True"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         FontSize="15"
+                         Foreground="White"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"/>
+            </ScrollViewer>
+        </Border>
 
-        <!-- Input Area -->
-        <DockPanel Grid.Row="1" Margin="10" LastChildFill="True">
-            <TextBox Name="InputBox"
-                     Height="60"
-                     TextWrapping="Wrap"
-                     AcceptsReturn="True"
-                     VerticalContentAlignment="Center"
-                     FontSize="14"
-                     MaxWidth="450"
-                     Margin="0,0,10,0" Width="450"/>
+        <!-- Bottom Bar -->
+        <Border Grid.Row="1"
+                Background="#2D2D2D"
+                CornerRadius="30"
+                Padding="12"
+                Height="70"
+                Margin="0"
+                VerticalAlignment="Bottom">
+            <DockPanel LastChildFill="True">
 
-            <Button Content="Send"
-                    Width="80"
-                    Height="60"
-                    Click="AskGPT_Click"
-                    Background="#FF007ACC"
-                    Foreground="White"
-                    FontWeight="Bold"
-                    BorderBrush="Transparent"
-                    Cursor="Hand"
-                    HorizontalAlignment="Right"/>
-        </DockPanel>
+                <!-- Tools Icon -->
+                <TextBlock Text="＋"
+                           FontSize="22"
+                           Foreground="Gray"
+                           Margin="0,0,10,0"
+                           VerticalAlignment="Center" />
 
+                <!-- Text Input + Placeholder -->
+                <Grid>
+                    <TextBlock x:Name="InputPlaceholder"
+                               Text="Ask anything..."
+                               Foreground="Gray"
+                               FontStyle="Italic"
+                               Margin="5,3,0,0"
+                               IsHitTestVisible="False"
+                               VerticalAlignment="Top"
+                               Visibility="Visible"/>
 
+                    <TextBox Name="InputBox"
+                             AcceptsReturn="True"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="White"
+                             FontSize="14"
+                             TextWrapping="Wrap"
+                             VerticalContentAlignment="Center"
+                             KeyDown="InputBox_KeyDown"
+                             TextChanged="InputBox_TextChanged"
+                             Margin="0"
+                             MinHeight="30"
+                             BorderBrush="Transparent"/>
+                </Grid>
 
-        <!-- Footer -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
-            <TextBlock Text="Powered by BIM Digital Design | " FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
-            <TextBlock FontSize="12" VerticalAlignment="Center">
-                <Hyperlink NavigateUri="mailto:bimdigitaldesign@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
-                    bimdigitaldesign@gmail.com
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+                <!-- Send Button -->
+                <Button x:Name="SendButton"
+                        Width="40"
+                        Height="40"
+                        ToolTip="Send"
+                        Background="#3A3D41"
+                        Foreground="White"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Content="↑"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        Click="AskGPT_Click"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="10,0,0,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+            </DockPanel>
+        </Border>
     </Grid>
 </Window>
