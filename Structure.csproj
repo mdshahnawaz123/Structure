@@ -15,6 +15,7 @@
     <None Remove="Resources\Coordinate.png" />
     <None Remove="Resources\Data.png" />
     <None Remove="Resources\Dim.png" />
+    <None Remove="Resources\DoorStiffner.png" />
     <None Remove="Resources\Export.png" />
     <None Remove="Resources\Floor.png" />
     <None Remove="Resources\Grid.png" />
@@ -32,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
   </ItemGroup>
 
@@ -52,6 +54,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Dim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\DoorStiffner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Export.png">
