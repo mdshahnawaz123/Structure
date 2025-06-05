@@ -17,11 +17,8 @@ namespace Structure.Command
         {
             var uidoc = commandData.Application.ActiveUIDocument;
             var doc = uidoc.Document;
-
             var frm = new WorkSetUI(doc, uidoc);
             frm.Show();
-
-
             return Result.Succeeded;
         }
     }

@@ -9,18 +9,23 @@ namespace Structure.App
     {
         public Result OnStartup(UIControlledApplication application)
         {
-            // === LOGIN CHECK BEFORE LOADING ANY UI ===
-            DateTime lastLogin = Properties.Settings.Default.LastLoginDate;
-            bool isRecent = (DateTime.Now - lastLogin).TotalDays <= 30;
+            var login = new Structure.UI.Loginform();
 
-            if (!isRecent)
+            bool skipLogin = login.TryAutoLoginAndClose();
+
+            if (!skipLogin)
             {
-                var login = new Structure.UI.Loginform();
-                bool? result = login.ShowDialog();
+                // Show login window properly
+                bool? result = null;
+
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    result = login.ShowDialog();
+                });
 
                 if (result != true)
                 {
-                    TaskDialog.Show("Login Required", "Access denied. You must log in to use BIM Digital Design.");
+                    TaskDialog.Show("Login Failed", "Login was cancelled.");
                     return Result.Cancelled;
                 }
             }

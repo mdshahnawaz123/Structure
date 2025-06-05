@@ -34,6 +34,7 @@
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="8.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
   </ItemGroup>
 

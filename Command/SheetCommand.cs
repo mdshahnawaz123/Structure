@@ -6,18 +6,23 @@ using System.Threading.Tasks;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Structure.UI;
 
 namespace Structure.Command
 {
     [Transaction(TransactionMode.Manual)]
-    public class MarkCommand : IExternalCommand
+    [Regeneration(RegenerationOption.Manual)]
+    public class SheetCommand : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             var uidoc = commandData.Application.ActiveUIDocument;
             var doc = uidoc.Document;
-            var frm = new UI.MarkUI(doc, uidoc);
+
+            var frm = new SheetExportUI(doc, uidoc);
             frm.Show();
+
+
             return Result.Succeeded;
         }
     }
