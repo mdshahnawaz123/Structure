@@ -1,0 +1,42 @@
+﻿<Window x:Class="Structure.UI.SharedParamUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Shared Parameter" Height="Auto" Width="900" MinHeight="500"
+        ResizeMode="NoResize">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,10">
+            <Button Content="Add Parameter" Width="120" Margin="0,0,10,0"/>
+            <ComboBox Width="120" Margin="0,0,10,0">
+                <ComboBoxItem Content="Import/Export"/>
+            </ComboBox>
+            <ComboBox Width="120" Margin="0,0,10,0">
+                <ComboBoxItem Content="Batch Actions"/>
+            </ComboBox>
+            <CheckBox Content="Show Existing Parameters" IsChecked="True" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Search Bar -->
+        <TextBox Width="200" HorizontalAlignment="Right" Margin="0,0,0,10" VerticalAlignment="Top"
+                 Grid.Row="0" Height="25"/>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="1" Name="ParameterGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+                  SelectionMode="Extended" HeadersVisibility="Column" >
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="40"/>
+                <DataGridTextColumn Header="Parameter Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="150"/>
+                <DataGridTextColumn Header="Discipline" Binding="{Binding Discipline}" Width="120"/>
+                <DataGridTextColumn Header="Type of Parameter" Binding="{Binding ParamType}" Width="120"/>
+                <DataGridTextColumn Header="Group Under" Binding="{Binding GroupUnder}" Width="120"/>
+                <DataGridTextColumn Header="Instance/Type" Binding="{Binding InstanceOrType}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

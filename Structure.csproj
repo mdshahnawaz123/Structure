@@ -1,107 +1,58 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-	        <UseWPF>true</UseWPF>	  
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Platforms>AnyCPU;x64</Platforms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Platforms>AnyCPU;x64</Platforms>
+		<AssemblyName>ClashTool</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\AI.png" />
-    <None Remove="Resources\Beam.png" />
-    <None Remove="Resources\Column.png" />
-    <None Remove="Resources\Coordinate.png" />
-    <None Remove="Resources\Data.png" />
-    <None Remove="Resources\Dim.png" />
-    <None Remove="Resources\DoorStiffner.png" />
-    <None Remove="Resources\Export.png" />
-    <None Remove="Resources\Floor.png" />
-    <None Remove="Resources\Grid.png" />
-    <None Remove="Resources\Join.png" />
-    <None Remove="Resources\Mark.png" />
-    <None Remove="Resources\PCC.png" />
-    <None Remove="Resources\Wall.png" />
-    <None Remove="Resources\WorkSet.png" />
-    <None Remove="Resources\XML.png" />
-  </ItemGroup>
+	<!-- ✅ NuGet dependencies -->
+	<ItemGroup>
+		<PackageReference Include="EPPlus" Version="8.0.7" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+		<PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+	<!-- ✅ Resources -->
+	<ItemGroup>
+		<Resource Include="Resources\AI.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Beam.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Column.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Coordinate.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Data.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Dim.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\DoorStiffner.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Export.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Floor.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Grid.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Join.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Mark.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\PCC.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\Wall.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\WorkSet.png" CopyToOutputDirectory="PreserveNewest" />
+		<Resource Include="Resources\XML.png" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EPPlus" Version="8.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
-    <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
-  </ItemGroup>
+	<!-- ✅ Folder structure -->
+	<ItemGroup>
+		<Folder Include="Model\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\AI.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Beam.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Column.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Coordinate.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Data.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Dim.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\DoorStiffner.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Export.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Floor.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Grid.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Join.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Mark.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\PCC.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Wall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\WorkSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\XML.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+	<!-- ✅ Settings support -->
+	<ItemGroup>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
 
 </Project>

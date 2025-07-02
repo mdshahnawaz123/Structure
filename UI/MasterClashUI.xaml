@@ -1,0 +1,65 @@
+﻿<Window x:Class="Structure.UI.MasterClashUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Structure.UI"
+        mc:Ignorable="d"
+        Title="Clash Master" Height="500" Width="900"
+        Background="#F4F6F8"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Bar -->
+        <Border Grid.Row="0" Background="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="Import Excel"
+                        Width="150" Height="35"
+                        Margin="0,0,15,0"
+                        Background="#0078D7" Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="ImportExcel"/>
+
+                <Button Content="Search"
+                        Width="120" Height="35"
+                        Background="#28A745" Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="SearchElement"
+                        Margin="240,0,0,0"/>
+
+                <TextBox Name="SearchTextBox"
+                         Width="200" Height="35"
+                         Margin="10,0,0,0"
+                         VerticalAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ListView -->
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="10">
+            <ListView Name="ClashReportsListView"
+                      BorderThickness="0"
+                      SelectionChanged="ClashReportsListView_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Element ID" DisplayMemberBinding="{Binding ElementId}" Width="100"/>
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                        <GridViewColumn Header="Clash Point" DisplayMemberBinding="{Binding ClashPoint}" Width="300"/>
+                        <GridViewColumn Header="Image" DisplayMemberBinding="{Binding Image}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+    </Grid>
+</Window>

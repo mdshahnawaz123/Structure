@@ -9,139 +9,184 @@ namespace Structure.App
     {
         public Result OnStartup(UIControlledApplication application)
         {
-            var login = new Structure.UI.Loginform();
-
-            bool skipLogin = login.TryAutoLoginAndClose();
-
-            if (!skipLogin)
+            try
             {
-                // Show login window properly
-                bool? result = null;
+                // === LOGIN FLOW ===
+                var login = new Structure.UI.Loginform();
+                bool skipLogin = false;
 
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                try
                 {
-                    result = login.ShowDialog();
-                });
-
-                if (result != true)
-                {
-                    TaskDialog.Show("Login Failed", "Login was cancelled.");
-                    return Result.Cancelled;
+                    skipLogin = login.TryAutoLoginAndClose();
                 }
+                catch (Exception ex)
+                {
+                    TaskDialog.Show("Login Error", $"Auto-login failed: {ex.Message}");
+                    return Result.Failed;
+                }
+
+                if (!skipLogin)
+                {
+                    bool? result = null;
+
+                    try
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            result = login.ShowDialog();
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        TaskDialog.Show("Login Error", $"Login dialog failed: {ex.Message}");
+                        return Result.Failed;
+                    }
+
+                    if (result != true)
+                    {
+                        TaskDialog.Show("Login Cancelled", "Login was cancelled by the user.");
+                        return Result.Cancelled;
+                    }
+                }
+
+                // === CREATE RIBBON TAB ===
+                const string tabName = "BIM Digital Design";
+                try { application.CreateRibbonTab(tabName); } catch { /* Tab might already exist */ }
+
+                string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+                #region CAD Automation Panel
+                var cadPanel = SafeCreatePanel(application, tabName, "CAD Automation");
+                AddButtonSafe(cadPanel, "Floor Automation", "Floor", "Structure.Command.FloorCommand",
+                    "Generates a structural floor based on predefined parameters.", "Floor.png", assemblyPath);
+
+                AddButtonSafe(cadPanel, "Grid Automation", "Grid", "Structure.Command.GridCommand",
+                    "Generates a structural grid system.", "Grid.png", assemblyPath);
+
+                AddButtonSafe(cadPanel, "Beam Automation", "Beam", "Structure.Command.BeamCommand",
+                    "Generates a structural beam system.", "Beam.png", assemblyPath);
+
+                AddButtonSafe(cadPanel, "Wall Automation", "Wall", "Structure.Command.WallCommand",
+                    "Generates a structural wall system.", "Wall.png", assemblyPath);
+
+                AddButtonSafe(cadPanel, "Column Automation", "Column", "Structure.Command.ColumnCommand",
+                    "Places structural columns in the project.", "Column.png", assemblyPath);
+
+                cadPanel.AddSeparator();
+                #endregion
+
+                #region Model Automation Panel
+                var modelPanel = SafeCreatePanel(application, tabName, "Model Automation");
+
+                AddButtonSafe(modelPanel, "Join Automation", "Join/Unjoin", "Structure.Command.JoinCommand",
+                    "Joins or unjoins structural elements.", "Join.png", assemblyPath);
+
+                AddButtonSafe(modelPanel, "Coordinates Automation", "Coordinates", "Structure.Command.CoordinatesCommand",
+                    "Generates pile coordinates based on predefined rules.", "Coordinate.png", assemblyPath);
+
+                AddButtonSafe(modelPanel, "PCC Automation", "PCC", "Structure.Command.PCommand",
+                    "Generates Foundation PCC based on predefined rules.", "PCC.png", assemblyPath);
+
+                AddButtonSafe(modelPanel, "WorkSet Automation", "Workset", "Structure.Command.WorkSetCommand",
+                    "Assigns worksets based on predefined rules.", "WorkSet.png", assemblyPath);
+
+                AddButtonSafe(modelPanel, "Door Stiffener Automation", "Stiffener", "Structure.Command.DoorStiffenerCommand",
+                    "Creates a door stiffener according to predefined rules.", "DoorStiffner.png", assemblyPath);
+
+                AddButtonSafe(modelPanel, "ChatGPT AI", "ChatGPT", "Structure.Command.ChatGPTCommand",
+                    "Chat with your AI assistant.", "AI.png", assemblyPath);
+                #endregion
+
+                #region Dimension Automation Panel
+                var dimPanel = SafeCreatePanel(application, tabName, "Dimension Automation");
+
+                AddButtonSafe(dimPanel, "Grid Dimension Automation", "Dim-Grid", "Structure.Command.GridDimension",
+                    "Create grid-to-grid dimensions as per predefined rules.", "Dim.png", assemblyPath);
+
+                AddButtonSafe(dimPanel, "Column Dimension Automation", "Dim-Column", "Structure.Command.ColumnDimension",
+                    "Create column-to-grid dimensions as per predefined rules.", "Dim.png", assemblyPath);
+                #endregion
+
+                #region Parameter Automation Panel
+                var paramPanel = SafeCreatePanel(application, tabName, "Parameter Automation");
+
+                AddButtonSafe(paramPanel, "Mark Automation", "Mark", "Structure.Command.MarkCommand",
+                    "Assigns mark parameters according to predefined rules.", "Mark.png", assemblyPath);
+                #endregion
+
+                #region Data Visualizer Panel
+                var dataPanel = SafeCreatePanel(application, tabName, "Data Visualizer");
+
+                AddButtonSafe(dataPanel, "Foundation Data Visualization", "Foundation", "Structure.Command.FoundationData",
+                    "Visualizes foundation data based on defined rules.", "Data.png", assemblyPath);
+                #endregion
+
+                #region Data Export Panel
+                var exportPanel = SafeCreatePanel(application, tabName, "Data Export");
+
+                AddButtonSafe(exportPanel, "Export Data to Excel", "Export", "Structure.Command.FoundationData",
+                    "Exports foundation data to Excel.", "XML.png", assemblyPath);
+                #endregion
+
+                return Result.Succeeded;
             }
-
-            // === CREATE RIBBON UI ===
-            string tabName = "BIM Digital Design";
-            try { application.CreateRibbonTab(tabName); } catch { }
-
-            RibbonPanel cadAutomationPanel = application.CreateRibbonPanel(tabName, "CAD Automation");
-            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-
-            // === Floor Button ===
-            var floor = new PushButtonData("Floor Automation", "Floor", assemblyPath, "Structure.Command.FloorCommand");
-            PushButton floorButton = cadAutomationPanel.AddItem(floor) as PushButton;
-            floorButton.ToolTip = "Generates a structural floor based on predefined parameters.";
-            floorButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Floor.png"));
-
-            // === Grid Button ===
-            var grid = new PushButtonData("Grid Automation", "Grid", assemblyPath, "Structure.Command.GridCommand");
-            PushButton gridButton = cadAutomationPanel.AddItem(grid) as PushButton;
-            gridButton.ToolTip = "Generates a structural grid system.";
-            gridButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Grid.png"));
-
-            // === Beam Button ===
-            var beam = new PushButtonData("beam Automation", "Beam", assemblyPath, "Structure.Command.BeamCommand");
-            PushButton beamButton = cadAutomationPanel.AddItem(beam) as PushButton;
-            beamButton.ToolTip = "Generates a structural Beam system.";
-            beamButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Beam.png"));
-
-            // === Wall Button ===
-            var wall = new PushButtonData("Wall Automation", "Wall", assemblyPath, "Structure.Command.WallCommand");
-            PushButton wallButton = cadAutomationPanel.AddItem(wall) as PushButton;
-            wallButton.ToolTip = "Generates a structural Wall system.";
-            wallButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Wall.png"));
-
-            // === Column Button ===
-            var column = new PushButtonData("Column Automation", "Column", assemblyPath, "Structure.Command.ColumnCommand");
-            PushButton columnButton = cadAutomationPanel.AddItem(column) as PushButton;
-            columnButton.ToolTip = "Places structural columns in the project.";
-            columnButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Column.png"));
-
-            cadAutomationPanel.AddSeparator();
-
-            RibbonPanel ModelAutomationPanel = application.CreateRibbonPanel(tabName, "Model Automation");
-
-            var join = new PushButtonData("Join Automation", "Join/Unjoin", assemblyPath, "Structure.Command.JoinCommand");
-            PushButton joinButton = ModelAutomationPanel.AddItem(join) as PushButton;
-            joinButton.ToolTip = "Joins or unjoins structural elements.";
-            joinButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Join.png"));
-
-            var coordinates = new PushButtonData("Coordinates Automation", "Coordinates", assemblyPath, "Structure.Command.CoordinatesCommand");
-            PushButton coordinatesButton = ModelAutomationPanel.AddItem(coordinates) as PushButton;
-            coordinatesButton.ToolTip = "Generates pile coordinates based on predefined rules.";
-            coordinatesButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Coordinate.png"));
-
-            var pcc = new PushButtonData("Pcc Automation", "PCC", assemblyPath, "Structure.Command.PCommand");
-            PushButton PButton = ModelAutomationPanel.AddItem(pcc) as PushButton;
-            PButton.ToolTip = "Generates Foundation PCC based on predefined rules.";
-            PButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/PCC.png"));
-
-            var workset = new PushButtonData("WorkSet Automation", "Workset", assemblyPath, "Structure.Command.WorkSetCommand");
-            PushButton WorksetButton = ModelAutomationPanel.AddItem(workset) as PushButton;
-            WorksetButton.ToolTip = "Assign WorkSet based on predefined rules.";
-            WorksetButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/WorkSet.png"));
-
-            // === Door Stiffener Button ===
-            var DoorStiffener = new PushButtonData("Door Stiffener Automation", "Stiffener", assemblyPath, "Structure.Command.DoorStiffenerCommand");
-            PushButton DoorButton = ModelAutomationPanel.AddItem(DoorStiffener) as PushButton;
-            DoorButton.ToolTip = "Create Door Stiffener as per predefined rules.";
-            DoorButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/DoorStiffner.png"));
-
-            var chatGpt = new PushButtonData("ChatGPT AI", "ChatGPT", assemblyPath, "Structure.Command.ChatGPTCommand");
-            PushButton ChatButton = ModelAutomationPanel.AddItem(chatGpt) as PushButton;
-            ChatButton.ToolTip = "Chat With your AI.";
-            ChatButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/AI.png"));
-
-            RibbonPanel DimensionPanel = application.CreateRibbonPanel(tabName, "Dimension Automation");
-
-            var GDimension = new PushButtonData("Grid Dimension Automation", "Dim-Grid", assemblyPath, "Structure.Command.GridDimension");
-            PushButton GButton = DimensionPanel.AddItem(GDimension) as PushButton;
-            GButton.ToolTip = "Create Grid to Grid Dimension as per predefined rules.";
-            GButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Dim.png"));
-
-            var CDimension = new PushButtonData("Column Dimension Automation", "Dim-Column", assemblyPath, "Structure.Command.ColumnDimension");
-            PushButton CButton = DimensionPanel.AddItem(CDimension) as PushButton;
-            CButton.ToolTip = "Create Column to Grid Dimension as per predefined rules.";
-            CButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Dim.png"));
-
-            RibbonPanel ParameterPanel = application.CreateRibbonPanel(tabName, "Parameter Automation");
-
-            var markparm = new PushButtonData("Mark Automation", "Mark", assemblyPath, "Structure.Command.MarkCommand");
-            PushButton MarkButton = ParameterPanel.AddItem(markparm) as PushButton;
-            MarkButton.ToolTip = "Create Grid to Grid Dimension as per predefined rules.";
-            MarkButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Mark.png"));
-
-            RibbonPanel DataPanel = application.CreateRibbonPanel(tabName, "Data Visualizer");
-
-            var data = new PushButtonData("Foundation Data Visualization", "Foundation", assemblyPath, "Structure.Command.FoundationData");
-            PushButton dataButton = DataPanel.AddItem(data) as PushButton;
-            dataButton.ToolTip = "Visualize the Data as per predefined rules.";
-            dataButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/Data.png"));
-
-            RibbonPanel DataExportPanel = application.CreateRibbonPanel(tabName, "Data Export");
-
-            var Exportdata = new PushButtonData("Export Data to Excel", "Export", assemblyPath, "Structure.Command.FoundationData");
-            PushButton dataExportButton = DataExportPanel.AddItem(Exportdata) as PushButton;
-            dataExportButton.ToolTip = "Export data as per predefined rules.";
-            dataExportButton.LargeImage = new BitmapImage(new Uri("pack://application:,,,/Structure;component/Resources/XML.png"));
-
-            return Result.Succeeded;
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Startup Error", $"Unexpected error occurred: {ex.Message}");
+                return Result.Failed;
+            }
         }
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            TaskDialog.Show("Message", "See you Next Time");
-            return Result.Succeeded;
+            try
+            {
+                TaskDialog.Show("Goodbye", "See you next time.");
+                return Result.Succeeded;
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Shutdown Error", $"Error during shutdown: {ex.Message}");
+                return Result.Failed;
+            }
+        }
+
+        /// <summary>
+        /// Safely creates a ribbon panel, catching any exceptions.
+        /// </summary>
+        private RibbonPanel SafeCreatePanel(UIControlledApplication app, string tabName, string panelName)
+        {
+            try
+            {
+                return app.CreateRibbonPanel(tabName, panelName);
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Panel Error", $"Failed to create panel '{panelName}': {ex.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Safely creates and adds a PushButton to a panel.
+        /// </summary>
+        private void AddButtonSafe(RibbonPanel panel, string name, string text, string className, string tooltip, string imageName, string assemblyPath)
+        {
+            try
+            {
+                var buttonData = new PushButtonData(name, text, assemblyPath, className);
+                PushButton button = panel.AddItem(buttonData) as PushButton;
+
+                if (button != null)
+                {
+                    button.ToolTip = tooltip;
+                    button.LargeImage = new BitmapImage(new Uri($"pack://application:,,,/Structure;component/Resources/{imageName}"));
+                }
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Button Error", $"Failed to create button '{text}': {ex.Message}");
+            }
         }
     }
 }
